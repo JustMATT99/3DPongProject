@@ -56,37 +56,46 @@ namespace Pong3D
 
             // If player (left side) is trying to move up, do the stuff below here
             if (Input.GetAxis(Axis) > 0)
+            {
+
+                if (CurrentTransform.position.y >= TopWallY - HalfHeight)
                 {
-
-                    if (CurrentTransform.position.y >= TopWallY - HalfHeight)
-                    {
-                        // if they are trying to go up through the top wall, stop, and skip all of this stuff
-                        return;
-                    }
-                    else
-                    {
-                        // if player is NOT trying to move through the top wall, do some weird math things to make them move smoothly
-                        InputDir.y = Input.GetAxis(Axis) * Speed * Mathf.Min(1, Speed / 2);
-
-                        CurrentTransform.position += InputDir * Time.deltaTime;
-                    }
+                    // if they are trying to go up through the top wall, stop, and skip all of this stuff
+                    return;
                 }
+                else
+                {
+                    // if player is NOT trying to move through the top wall, do some weird math things to make them move smoothly
+
+                    
+                    InputDir.y = Input.GetAxis(Axis) * Speed * Mathf.Min(1, Speed / 2);
+
+                    CurrentTransform.position += InputDir * Time.deltaTime;
+                    
+
+                    
+                }
+            }
             // otherwise, if player is trying to move down, do this stuff instead
             if (Input.GetAxis(Axis) < 0)
+            {
+                if (CurrentTransform.position.y <= BottomWallY + HalfHeight)
                 {
-                    if (CurrentTransform.position.y <= BottomWallY + HalfHeight)
-                    {
-                        // if they are trying to go down through the bottom wall, stop, and just ignore everything else
-                        return;
-                    }
-                    else
-                    {
-                        // if player 1 is NOT trying to move through the bottom wall, do some more weird math things to let them move smoothly
-                        InputDir.y = Input.GetAxis(Axis) * Speed * Mathf.Min(1, Speed / 2);
-
-                        CurrentTransform.position += InputDir * Time.deltaTime;
-                    }
+                    // if they are trying to go down through the bottom wall, stop, and just ignore everything else
+                    return;
                 }
+                else
+                {
+                    
+                    // if player 1 is NOT trying to move through the bottom wall, do some more weird math things to let them move smoothly
+                    InputDir.y = Input.GetAxis(Axis) * Speed * Mathf.Min(1, Speed / 2);
+
+                    CurrentTransform.position += InputDir * Time.deltaTime;
+                    
+                }
+            }
+
+            
                 
         }
     }
